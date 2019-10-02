@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="mx-auto" style="text-align: center; padding-bottom: 1vh;">
+        <h3>Blog users</h3>
+    </div>
+
+    {% if users|length != 0 %}
+        {% for user in users %}
+
+            <div class="list-group mx-auto" style="width: 70%; margin-bottom: 1vh;">
+                    <a href="/blog?user={{user.id}}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{user.username}}</h5>
+                        </div>
+                    </a>
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <h3 style='text-align: center;'>No users yet</h3>
+    {% endif %}
+
+{% endblock %}

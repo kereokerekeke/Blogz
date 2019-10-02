@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="mx-auto" style="text-align: center; padding-bottom: 1vh;">
+        <h3>Blogs</h3>
+    </div>
+
+    {% if blogs|length != 0 %}
+        {% for blog in blogs %}
+
+            <div class="list-group mx-auto" style="width: 70%; margin-bottom: 1vh;">
+                    <a href="/blog?blog_id={{blog.id}}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{blog.title}}</h5>
+                            <small class="text-muted">Created at: {{blog.created_at}}</small>
+                        </div>
+                    </a>
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <h3 style='text-align: center;'>No blogs here yet</h3>
+    {% endif %}
+
+{% endblock %}
