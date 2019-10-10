@@ -15,8 +15,10 @@
                             <h5 class="mb-1">{{blog.title}}</h5>
                             <small class="text-muted">Created at: {{blog.created_at}}</small>
                         </div>
-                        <p class="mb-1">Created by: {{blog.owner.username}}</p>
                     </a>
+                        <p class="mb-1">
+                            Created by: <a href='/blog?user={{blog.owner_id}}'>{{blog.owner.username}}</a>
+                        </p>   
             </div>
 
         {% endfor %}

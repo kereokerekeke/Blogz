@@ -13,7 +13,7 @@ db.init_app(app)
 
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'signup']
+    allowed_routes = ['index', 'login', 'signup']
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
@@ -28,7 +28,7 @@ def login():
         if user and user.password == password:
             session['username'] = username
             flash("Logged in", category="alert-success")
-            return redirect('/')
+            return redirect('/newpost')
         else:
             flash('User password is incorrect or user does not exist', category="alert-danger")
             return redirect('/')
@@ -60,7 +60,7 @@ def newpost():
         db.session.add(new_blog)
         db.session.commit()
         flash('Post created', category='alert-success')
-        return redirect('/blog?id={user_id}'.format(user_id=new_blog.owner_id))
+        return redirect('/blog?blog_id={blog_id}'.format(blog_id=new_blog.id))
     
     return render_template('newpost.html')
 
@@ -136,7 +136,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             session['username'] = username
-            return redirect('/')
+            return redirect('/newpost')
         else:
             flash('User already exists', category='alert-danger')
             return redirect('/signup')
